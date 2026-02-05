@@ -8,7 +8,9 @@ import{ Alert,IconButton } from "@mui/material";
 import BlockIcon from '@mui/icons-material/Block';
 
 
-const socket = io("http://localhost:5000");
+const socket = io("https://conceptual-camala-aligamal-eb60638f.koyeb.app", {
+  transports: ["websocket", "polling"]
+});
 
 
 export default function PrivateChat(){
@@ -26,18 +28,18 @@ export default function PrivateChat(){
     useEffect(()=>{
         const fetchMessages = async ()=>{
             try{
-                const res  = await axiosInstance.get(`http://localhost:5000/api/message/${userId}/${friendId}`);
+                const res  = await axiosInstance.get(`/api/message/${userId}/${friendId}`);
                 setMessages(res.data);
                 console.log(res);
 
-                const user  = await axiosInstance.get(`http://localhost:5000/api/user/${userId}`);
+                const user  = await axiosInstance.get(`/api/user/${userId}`);
                 const isblocked = user.data.bannedList.includes(friendId);
                 if(isblocked){
                   setIsBanned({status: true,by:userId});
                   setErrorMessage("انت حظرت هذه المحادثة");
                 }
 
-                const friend  = await axiosInstance.get(`http://localhost:5000/api/user/${friendId}`);
+                const friend  = await axiosInstance.get(`/api/user/${friendId}`);
                 const isHeblockedMe = friend.data.bannedList.includes(userId);
                 if(isHeblockedMe){
                   setIsBanned({status: true,by:friendId});
@@ -104,7 +106,7 @@ export default function PrivateChat(){
             console.log("receiverId:", friendId);
             console.log("content:", content);
 
-            const res = await axiosInstance.post("http://localhost:5000/api/message",{
+            const res = await axiosInstance.post("/api/message",{
                 senderId:userId,
                 receiverId: friendId,
                 content,
@@ -122,7 +124,7 @@ export default function PrivateChat(){
       if(isbanned.status === true){
         if(isbanned.by === userId){
 
-          const res = await axiosInstance.put("http://localhost:5000/api/user/block",{
+          const res = await axiosInstance.put("/api/user/block",{
                 userblockedId:friendId
           });
           console.log("ضغطت على حظر وراحت للباك صح");
@@ -136,7 +138,7 @@ export default function PrivateChat(){
         setErrorMessage("لا يمكنك الغاء الحظر..الطرف الاخر قام بحظرك");
       }
       }else{
-        const res = await axiosInstance.put("http://localhost:5000/api/user/block",{
+        const res = await axiosInstance.put("/api/user/block",{
                 userblockedId:friendId
           });
         console.log(res.data)
@@ -161,7 +163,7 @@ export default function PrivateChat(){
       try{
         if(isbanned.status === false ){
 
-          await axiosInstance.put(`http://localhost:5000/api/message/likeDeleted/${id}`,{
+          await axiosInstance.put(`/api/message/likeDeleted/${id}`,{
             deleted:true,
           });
           setMessages((prev)=>
