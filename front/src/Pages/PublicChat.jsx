@@ -7,7 +7,9 @@ import "./PrivateChat1.css";
 import{ Alert   } from "@mui/material";
 
 
-const socket = io("http://localhost:5000");
+const socket = io("https://conceptual-camala-aligamal-eb60638f.koyeb.app", {
+  transports: ["websocket", "polling"]
+});
 
 
 export default function PrivateChat(){
@@ -24,7 +26,7 @@ export default function PrivateChat(){
     useEffect(()=>{
         const fetchMessages = async ()=>{
             try{
-                const res  = await axiosInstance.get(`http://localhost:5000/api/message/room/${roomID}`);
+                const res  = await axiosInstance.get(`/api/message/room/${roomID}`);
                 setMessages(res.data);
                 console.log(res);
             }catch(err){
@@ -70,7 +72,7 @@ export default function PrivateChat(){
             console.log("receiverId:", roomID);
             console.log("content:", content);
 
-            const res = await axiosInstance.post("http://localhost:5000/api/message/room",{
+            const res = await axiosInstance.post("/api/message/room",{
                 senderId:userID,
                 receiverId: roomID,
                 content,
@@ -87,7 +89,7 @@ export default function PrivateChat(){
 
     const deleteMessage = async(id)=>{
       try{
-        await axiosInstance.put(`http://localhost:5000/api/message/likeDeleted/${id}`,{
+        await axiosInstance.put(`/api/message/likeDeleted/${id}`,{
           deleted:true,
         });
         setMessages((prev)=>
