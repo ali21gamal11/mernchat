@@ -7,7 +7,7 @@ import "./PrivateChat1.css";
 import{ Alert   } from "@mui/material";
 
 
-const socket = io({
+const socket = io("https://chatingaapp-production.up.railway.app", {
   transports: ["websocket"]
 });
 

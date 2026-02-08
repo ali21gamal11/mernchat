@@ -8,7 +8,7 @@ import{ Alert,IconButton } from "@mui/material";
 import BlockIcon from '@mui/icons-material/Block';
 
 
-const socket = io({
+const socket = io("https://chatingaapp-production.up.railway.app", {
   transports: ["websocket"]
 });
 
