@@ -143,7 +143,7 @@ export default function PrivateChat(){
           type="text"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Type a message..."
+          placeholder="Type a message.."
         />
         <button type="submit">Send</button>
       </form>
