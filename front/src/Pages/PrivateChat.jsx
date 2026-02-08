@@ -8,9 +8,10 @@ import{ Alert,IconButton } from "@mui/material";
 import BlockIcon from '@mui/icons-material/Block';
 
 
-const socket = io("https://conceptual-camala-aligamal-eb60638f.koyeb.app", {
-  transports: ["websocket", "polling"]
+const socket = io({
+  transports: ["websocket"]
 });
+
 
 
 export default function PrivateChat(){

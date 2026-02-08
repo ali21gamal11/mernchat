@@ -7,9 +7,10 @@ import "./PrivateChat1.css";
 import{ Alert   } from "@mui/material";
 
 
-const socket = io("https://conceptual-camala-aligamal-eb60638f.koyeb.app", {
-  transports: ["websocket", "polling"]
+const socket = io({
+  transports: ["websocket"]
 });
+
 
 
 export default function PrivateChat(){

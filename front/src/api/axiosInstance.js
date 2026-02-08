@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie"
 
 const axiosInstance = axios.create({
-    baseURL:"https://conceptual-camala-aligamal-eb60638f.koyeb.app",
+    baseURL:"/api",
     headers: { "Content-Type": "application/json"}
 });
 
