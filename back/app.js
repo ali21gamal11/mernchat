@@ -28,8 +28,6 @@ const path = require("path");
 
 app.use(express.static(path.join(__dirname, "../front/build")));
 
-app.use(express.static(path.join(__dirname, "build")));
-
 app.use((req, res, next) => {
   if (req.method === "GET" && !req.path.startsWith("/api")) {
     res.sendFile(path.join(__dirname, "build", "index.html"));
@@ -76,7 +74,7 @@ io.on("connection",(socket)=>{
 
 
 
-const port = process.env.PORT
+const port = process.env.PORT || 8000;
 server.listen(port,()=>{
     console.log(`server is running on port ${port}`)
 })
