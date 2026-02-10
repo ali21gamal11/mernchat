@@ -21,6 +21,7 @@
 
 /* ===== Logo Section ===== */
 .navbar-logo-box {
+  margin-left: 30px !important;
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
