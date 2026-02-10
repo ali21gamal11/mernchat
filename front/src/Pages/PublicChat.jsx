@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect,useState,useRef } from "react";
 import Cookies from "js-cookie";
 import io from "socket.io-client";
 import axiosInstance from "../api/axiosInstance.js";
@@ -19,6 +19,7 @@ export default function PrivateChat(){
     
     const [ content , setContent ] = useState("");
     const [ messages , setMessages ] = useState([]);
+    const LastMessageRef = useRef(null)
     
     const userID = Cookies.get("id");
     const roomID = "650e2f1b3f1a2c0012345678";
@@ -61,9 +62,11 @@ export default function PrivateChat(){
       }
     },[roomID,userID]);
 
+        useEffect(()=>{
+      LastMessageRef.current?.scrollIntoView({behavior:"smooth"},[messages]);
+    })
 
-
-    // Send Message
+   
     const sendMessage = async (e)=>{
         e.preventDefault();
         if(!content.trim()) return;
@@ -136,6 +139,7 @@ export default function PrivateChat(){
             
           </div>
         ))}
+        <div ref={LastMessageRef}/>
       </div>
 
       <form onSubmit={sendMessage} className="send-box">
