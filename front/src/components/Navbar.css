@@ -11,6 +11,7 @@
 }
 
 .navbar-toolbar {
+  margin-left: 30px !important;
   padding: var(--spacing-md) var(--spacing-lg) !important;
   min-height: 70px !important;
   display: flex;
@@ -21,7 +22,6 @@
 
 /* ===== Logo Section ===== */
 .navbar-logo-box {
-  margin-left: 30px !important;
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
