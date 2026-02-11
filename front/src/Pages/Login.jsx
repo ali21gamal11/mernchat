@@ -27,7 +27,7 @@ export default function Login() {
     try{
       const res = await axiosInstance.post("/api/auth/login",form);
 
-      Cookies.set("token", res.data.token,{expires:1/50});
+      Cookies.set("token", res.data.token,{expires:1});
       Cookies.set("name", res.data.name,{expires:1});
       Cookies.set("id", res.data._id,{expires:1});
 
@@ -38,7 +38,7 @@ export default function Login() {
         password: ""
       })
       
-      alert("تم تسجيل دخولك يا اسد");
+     
     }catch(err){
       setErrorMessage((err.response?.data?.message || err.response?.data?.error ) || "حدث خطأ غير متوقع");
       console.error(err);
