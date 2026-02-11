@@ -33,7 +33,7 @@
 
 .sidebar .MuiList-root {
   padding: var(--spacing-md) 0;
-  padding-top: 20px
+  padding-top:20px !important;
 }
 
 .sidebar .MuiListItemButton-root {
